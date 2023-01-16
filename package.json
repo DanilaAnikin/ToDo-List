@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.13",
     "@supabase/supabase-js": "^2.4.0",
     "vue": "^3.2.45"
   },
