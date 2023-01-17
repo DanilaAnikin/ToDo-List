@@ -1,6 +1,9 @@
 <script setup>
 import {supabase} from '../supabase'
 import {ref, onMounted} from 'vue'
+import {TrashIcon} from '@heroicons/vue/24/outline'
+import {CheckCircleIcon} from '@heroicons/vue/24/outline';
+
 
 const todos = ref([])
 const addTodo = ref("")
@@ -43,15 +46,21 @@ onMounted(getData)
     <span>To Do List</span>
   </div>
   <div class="m-auto bg-blue-700 p-10 mt-12 max-w-xl w-full rounded-2xl">
-    <div class="flex justify-center py-4 px-8 bg-blue-500 text-slate-100 font-bold rounded-xl text-lg">
-      <span class="-ml-32 mr-40">Task</span>
+    <div v-if="todos.length != 0" class="flex justify-center py-4 px-8 bg-blue-500 text-slate-100 font-bold rounded-xl text-lg">
+      <span class="-ml-28 mr-44">Task</span>
       <span>Status</span>
     </div>
     <div v-for="list in todos" :class="`flex justify-center text-lg rounded-2xl p-6 mx-auto mt-8 ${list.Status ? 'bg-green-400 text-green-900' : 'bg-blue-300 text-blue-600'} max-w-lg w-full`">
       <span class="w-40"> {{ list.WhatToDo }} </span>
-      <button @click="changeStatus(list.id, list.Status)" :class="`mr-8 ml-4 text-slate-100 p-2 rounded-lg w-32 h-10 ${list.Status ? 'bg-green-700' : 'bg-blue-600'}`" v-if="list.Status">Finished</button>
-      <button @click="changeStatus(list.id, list.Status)" :class="`mr-8 ml-4 text-slate-100 p-2 rounded-lg w-32 h-10 ${list.Status ? 'bg-green-700' : 'bg-blue-600'}`" v-else>In process</button>
-      <button @click="deleteTodo(list.id)" class="text-slate-100 p-2 rounded-lg w-20 h-10 bg-red-700">Delete</button>
+      <button @click="changeStatus(list.id, list.Status)" :class="`mr-20 ml-14 text-slate-100 p-2 rounded-lg w-10 h-10 ${list.Status ? 'bg-green-700' : 'bg-blue-600'}`" v-if="list.Status">
+        <CheckCircleIcon class="w-6 h-6 text-slate-100"/>
+      </button>
+      <button @click="changeStatus(list.id, list.Status)" :class="`mr-8 ml-4 text-slate-100 p-2 rounded-lg w-32 h-10 ${list.Status ? 'bg-green-700' : 'bg-blue-600'}`" v-else>
+        In process
+      </button>
+      <button @click="deleteTodo(list.id)" class="text-slate-100 p-2 rounded-lg w-10 h-10 bg-red-700">
+        <TrashIcon class="h-6 w-5 text-slate-200 m-auto"/>
+      </button>
     </div>
 
     <div class="mx-auto mt-9 text-center">
