@@ -24,7 +24,7 @@ const changeStatus = async(id, status) => {
 const addToList = async() => {
   if(addTodo.value !== ""){
     noText.value = false
-    const {addToList} = await supabase.from('ToDos').insert({id: todos.value.length+1, WhatToDo: addTodo.value, Status: false})
+    const {addToList} = await supabase.from('ToDos').insert({WhatToDo: addTodo.value, Status: false})
     dropdown.value = false
     addTodo.value = ""
     getData()
@@ -74,3 +74,9 @@ onMounted(getData)
   </div>
 
 </template>
+
+<style>
+body{
+  background-color: lightblue;
+}
+</style>
