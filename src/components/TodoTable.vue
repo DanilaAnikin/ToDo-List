@@ -43,15 +43,15 @@ onMounted(getData)
 
 </script>
 <template>
-  <div class="mx-auto bg-transparent p-10 mt-16 max-w-xl w-full h-32 rounded-2xl text-center text-slate-800 border-2 border-slate-600 text-3xl font-bold">
+  <div class="mx-auto bg-transparent p-7 mt-8 max-w-xl w-full rounded-2xl text-center text-slate-800 border-2 border-slate-600 text-3xl font-bold">
     <span>To Do List</span>
   </div>
-  <div class="m-auto bg-transparent p-10 mt-12 max-w-xl w-full rounded-2xl border border-slate-800">
-    <div v-if="todos.length != 0" class="flex justify-center py-4 px-8 bg-transparent text-slate-900 font-bold rounded-xl text-lg">
+  <div class="m-auto bg-transparent p-8 mt-6 max-w-xl w-full rounded-2xl border border-slate-800">
+    <div v-if="todos.length != 0" class="flex justify-center py-2 px-8 bg-transparent text-slate-900 font-bold rounded-xl text-lg">
       <span class="-ml-36 mr-44">Task</span>
       <span>Status</span>
     </div>
-    <div v-for="list in todos" :class="`flex justify-center text-lg rounded-2xl p-6 mx-auto mt-6 items-center ${list.Status ? 'bg-slate-300' : 'bg-transparent'} border border-slate-800 text-slate-900 max-w-lg w-full`">
+    <div v-for="list in todos" :class="`flex justify-center text-lg rounded-2xl p-3 mx-auto mt-4 items-center ${list.Status ? 'bg-slate-300' : 'bg-transparent'} border border-slate-800 text-slate-900 max-w-lg w-full`">
       <span class="w-40 -ml-8"> {{ list.WhatToDo }} </span>
       <button @click="changeStatus(list.id, list.Status)" class="mr-20 ml-16 text-slate-100 bg-transparent justify-center flex items-center rounded-lg w-10 h-10" v-if="list.Status">
         <CheckCircleIcon class="w-9 h-9 text-green-700"/>
@@ -64,12 +64,12 @@ onMounted(getData)
       </button>
     </div>
 
-    <div class="mx-auto mt-9 text-center">
+    <div class="mx-auto mt-6 text-center">
       <button @click="dropdown = !dropdown, addTodo='', noText=false" class="hover:bg-slate-200 bg-transparent text-slate-800 border-2 border-slate-600 font-bold max-w-xs w-full h-16 text-xl rounded-2xl">
         New
       </button>
-      <input v-if="dropdown" v-on:keyup.enter="addToList" :class="`${noText ? 'bg-red-100 placeholder:text-red-400' : 'bg-transparent placeholder:text-slate-500'} border border-slate-500 p-3 w-64 mt-4 rounded-xl focus:bg-slate-200 focus:placeholder:text-slate-500 outline-none`" placeholder="What to do?" v-model="addTodo">
-      <button v-if="dropdown" class="bg-transparent block w-24 h-10 text-slate-800 font-bold border border-slate-800 text-xl rounded-xl mx-auto mt-2 focus:bg-slate-300" @click="addToList">Add</button>
+      <input v-if="dropdown" v-on:keyup.enter="addToList" :class="`${noText ? 'bg-red-100 placeholder:text-red-400' : 'bg-transparent placeholder:text-slate-500'} border border-slate-500 p-3 w-64 mt-2 rounded-xl focus:bg-slate-200 focus:placeholder:text-slate-500 outline-none`" placeholder="What to do?" v-model="addTodo">
+      <button v-if="dropdown" class="bg-transparent block w-24 h-10 text-slate-800 font-bold border border-slate-800 text-xl rounded-xl mx-auto mt-1 focus:bg-slate-300" @click="addToList">Add</button>
     </div>
     
   </div>
