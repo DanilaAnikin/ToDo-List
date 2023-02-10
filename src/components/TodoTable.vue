@@ -17,9 +17,9 @@ const getData = async() => {
   todos.value = data
 }
 
-const changeStatus = async(id, status) => {
-  const {changeStatus} = await supabase.from('ToDos').update({Status: !status}).eq('id', id);
-  getData()
+const changeStatus = async(todo) => {
+  todo.Status = !todo.Status;
+  const {changeStatus} = await supabase.from('ToDos').update({Status: todo.status}).eq('id', todo.id);
 }
 
 const addToList = async() => {
@@ -51,12 +51,12 @@ onMounted(getData)
       <span class="-ml-36 mr-44">Task</span>
       <span>Status</span>
     </div>
-    <div v-for="list in todos" :class="`flex justify-center text-lg rounded-2xl p-4 mx-auto mt-4 items-center ${list.Status ? 'bg-slate-300' : 'bg-transparent'} border border-slate-800 text-slate-900 max-w-lg w-full`">
+    <div v-for="(list, index) in todos" :key="index" :class="`flex justify-center text-lg rounded-2xl p-4 mx-auto mt-4 items-center ${list.Status ? 'bg-slate-300' : 'bg-transparent'} border border-slate-800 text-slate-900 max-w-lg w-full`">
       <span class="w-40 -ml-8"> {{ list.WhatToDo }} </span>
-      <button @click="changeStatus(list.id, list.Status)" class="mr-20 ml-16 text-slate-100 bg-transparent justify-center flex items-center rounded-lg w-10 h-10" v-if="list.Status">
+      <button @click="changeStatus(list)" class="mr-20 ml-16 text-slate-100 bg-transparent justify-center flex items-center rounded-lg w-10 h-10" v-if="list.Status">
         <CheckCircleIcon class="w-9 h-9 text-green-700"/>
       </button>
-      <button @click="changeStatus(list.id, list.Status)" class="mr-20 ml-16 text-slate-900 bg-transparent rounded-lg w-10 h-10" v-else>
+      <button @click="changeStatus(list)" class="mr-20 ml-16 text-slate-900 bg-transparent rounded-lg w-10 h-10" v-else>
         <ArrowTrendingUpIcon class="w-9 h-9 text-slate-800"/>
       </button>
       <button @click="deleteTodo(list.id)" class="text-red-700 hover:text-red-600 hover:border-red-600 border-2 border-red-700 rounded-lg w-10 h-10 bg-transparent">
